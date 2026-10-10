@@ -17,6 +17,13 @@ alias c := codex
 codex *args:
     cargo run --bin codex -- {args}
 
+# Build and install the Codex CLI release binary as `p-codex`.
+[windows]
+build-p-codex:
+    cargo build --release -p codex-cli --bin codex
+    Copy-Item .\target\release\codex.exe "$env:USERPROFILE\.cargo\bin\p-codex.exe" -Force
+    p-codex --version
+
 # `codex exec`
 exec *args:
     cargo run --bin codex -- exec {args}
